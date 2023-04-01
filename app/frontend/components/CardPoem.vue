@@ -26,14 +26,22 @@ export default {
   props: ["poem"],
   methods: {
     speak(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
+      var utterance = new SpeechSynthesisUtterance(text);
       window.speechSynthesis.speak(utterance);
+      utterance = null;
     }
   },
   mounted() {
     window.addEventListener('beforeunload', () => {
-      window.speechSynthesis.cancel()
+      window.speechSynthesis.cancel();
     })
+  },
+  watch: {
+    poem(nextPoem, previousPoem) {
+      if (nextPoem !== previousPoem) {
+        window.speechSynthesis.cancel();
+      }
+    }
   },
 }
 </script>
