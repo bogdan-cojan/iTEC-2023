@@ -135,6 +135,19 @@ module Apis
                 Scoate-ţi coarnele afară!"
         },
         {
+          title: "Fire and Ice",
+          author: "Robert Frost",
+          text: "Some say the world will end in fire,
+                Some say in ice.
+                From what I’ve tasted of desire
+                I hold with those who favor fire.
+                But if it had to perish twice,
+                I think I know enough of hate
+                To know that for destruction ice
+                Is also great,
+                And would suffice."
+        },
+        {
           title: "Melcul supărat",
           author: "Popor",
           text: "Vine melcul supărat, 
