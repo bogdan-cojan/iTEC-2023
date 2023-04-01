@@ -5,10 +5,21 @@
     <GenerateBtn @get-poem="fetchPoem()"/>
     <CardPoem v-if="poem" :poem="poem"/>
   </div>
-  {{  }}
+
+  <div class="toast align-items-center position-absolute top-0 end-0 m-4 shadow-effect" ref="toast"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        <i class="bi bi-exclamation-diamond text-danger me-2"></i>
+        Poem not found.
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
 </template>
 
 <script>
+import { Toast } from 'bootstrap';
 import GenerateBtn from './components/GenerateBtn.vue';
 import CardPoem from './components/CardPoem.vue';
 import Search from './components/Search.vue';
@@ -18,7 +29,7 @@ export default {
   components: {
     GenerateBtn,
     CardPoem,
-    Search
+    Search,
   },
   data() {
     return {
@@ -36,8 +47,9 @@ export default {
       await fetch("/apis/v1/search/poems?title=" + searchTitle)
         .then((response) => response.json())
         .then((data) => this.poem = data)
-        .catch(error => {
-          alert("Poem not found !")
+        .catch(() => {
+          const toastBootstrap = new Toast(this.$refs.toast);
+          toastBootstrap.show();
         })
     },
   }
