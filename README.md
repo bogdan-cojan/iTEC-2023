@@ -4,7 +4,7 @@
   </a>
 </p>
 
-| ![image](https://user-images.githubusercontent.com/60678383/229286880-bc16fafb-c8dc-47ce-82bd-da2a50989f08.png) |
+| ![image](https://user-images.githubusercontent.com/60678383/229306864-1b8da976-7718-48cc-9708-9dca1553a29f.png) |
 |-|
 
 # :wavy_dash: Setup :wavy_dash:
