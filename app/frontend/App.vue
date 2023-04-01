@@ -1,9 +1,12 @@
 <template>
-  <div class="app">
+  <div class="app" :style="cssVars">
     <h2 class="text-danger-emphasis mb-4">iTEC_2023</h2>
     <Search @search-poem="searchPoem"/>
     <GenerateBtn @get-poem="fetchPoem()"/>
     <CardPoem v-if="poem" :poem="poem"/>
+    <div class="position-absolute top-0 start-0 m-4">
+      <ColorPicker @bg-color-changed="changeBgColor"/>
+    </div>
   </div>
 
   <div class="toast align-items-center position-absolute top-0 end-0 m-4 shadow-effect" ref="toast"
@@ -23,6 +26,7 @@ import { Toast } from 'bootstrap';
 import GenerateBtn from './components/GenerateBtn.vue';
 import CardPoem from './components/CardPoem.vue';
 import Search from './components/Search.vue';
+import ColorPicker from './components/ColorPicker.vue';
 
 export default {
   name: "App",
@@ -30,13 +34,19 @@ export default {
     GenerateBtn,
     CardPoem,
     Search,
+    ColorPicker
   },
   data() {
     return {
       poem: null,
+      bgColor: 'whitesmoke',
     };
   },
   methods: {
+    changeBgColor(backgroundColor) {
+      this.bgColor = backgroundColor;
+    },
+
     async fetchPoem() {
       await fetch("/apis/v1/generate/poems")
         .then((response) => response.json())
@@ -52,13 +62,20 @@ export default {
           toastBootstrap.show();
         })
     },
+  },
+  computed: {
+    cssVars() {
+      return {
+        '--bg-color': this.bgColor
+      }
+    }
   }
 };
 </script>
 
 <style>
 .app {
-  background-color: whitesmoke;
+  background-color: var(--bg-color);
   height: 100vh;
   display: flex;
   flex-direction: column;
